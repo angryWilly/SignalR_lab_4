@@ -3,14 +3,72 @@
 <head>
 	<meta charset="utf-8" />
 	<title>SignalR_lab_4</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: #f9f9f9;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input[type="text"] {
+			width: 100%;
+			padding: 5px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+		}
+
+		input[type="button"] {
+			width: 100%;
+			padding: 10px;
+			background-color: #4caf50;
+			color: #fff;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+
+		#chatroom {
+			margin-top: 20px;
+			border-top: 1px solid #ccc;
+			padding-top: 10px;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		b {
+			font-weight: bold;
+		}
+	</style>
 </head>
 <body>
-	<div>
-		Your username:<br />
-		<input id="userName" type="text" /><br /><br />
-		Your message:<br />
-		<input type="text" id="message" /><br /><br />
-		<input type="button" id="sendBtn" value="Отправить" disabled="disabled" />
+	<div class="container">
+		<h2>SignalR Chat</h2>
+		<label for="userName">Your username:</label>
+		<input id="userName" type="text" />
+		<br /><br />
+		<label for="message">Your message:</label>
+		<input type="text" id="message" />
+		<br /><br />
+		<input type="button" id="sendBtn" value="Send" disabled="disabled" />
 	</div>
 	<div id="chatroom"></div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
@@ -23,7 +81,7 @@
 			const userName = document.getElementById("userName").value;
 			const message = document.getElementById("message").value;
 
-			hubConnection.invoke("Send", message, userName) 
+			hubConnection.invoke("Send", message, userName)
 				.catch(function (err) {
 					return console.error(err.toString());
 				});
